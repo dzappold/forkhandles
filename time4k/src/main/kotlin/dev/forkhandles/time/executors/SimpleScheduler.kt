@@ -1,6 +1,5 @@
 package dev.forkhandles.time.executors
 
-import java.io.Closeable
 import java.time.Duration
 import java.util.concurrent.Callable
 import java.util.concurrent.Future
@@ -9,7 +8,7 @@ import java.util.concurrent.ScheduledFuture
 /**
  * Simpler interface for threaded tasks.
  */
-interface SimpleScheduler: Closeable {
+interface SimpleScheduler {
     fun <T> schedule(callable: Callable<T>, delay: Duration): ScheduledFuture<T>
 
     fun schedule(runnable: Runnable, delay: Duration): ScheduledFuture<*>
@@ -25,6 +24,4 @@ interface SimpleScheduler: Closeable {
     fun submit(task: Runnable): Future<*>
 
     fun <T> submit(task: Callable<T>): Future<T>
-
-    override fun close() = shutdown()
 }
